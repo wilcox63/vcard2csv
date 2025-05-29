@@ -40,7 +40,7 @@ class VcfToCsvConverter:
 
 	def __trace(self, text):
 		if self.trace == True:
-			print text
+			print(text)
 
 	def __resetRow(self):
 		self.addressCount = { 'HOME' : 1, 'WORK' : 1 }
