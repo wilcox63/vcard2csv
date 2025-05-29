@@ -71,10 +71,10 @@ class VcfToCsvConverter:
 			if os.path.isdir(self.inputPath):
 				self.inputFileArray = glob.glob(os.path.join(self.inputPath, '*.vc[sf]') )
 			else:
-				print "Invalid path please try again"
+				print("Invalid path please try again")
 				sys.exit(2)
 		except IOError:
-			print "Directory is empty or does not contain any vcard format files."
+			print("Directory is empty or does not contain any vcard format files.")
 			sys.exit(2)
 
 	def __parseFile(self):
@@ -82,14 +82,14 @@ class VcfToCsvConverter:
 			for NewFileName in self.inputFile:
 				try:
 					if self.verbose:
-						print "Processing .... %s" % (NewFileName)
+						print("Processing .... %s" % (NewFileName))
 					inFile = codecs.open(NewFileName, 'r', 'utf-8', 'ignore')
 					theLine = inFile.readline()
 					for theLine in inFile:
 						self.__parseLine(theLine)
 					inFile.close()
 				except IOError:
-					print "error opening file during read operation: %s" % (NewFileName)
+					print("error opening file during read operation: %s" % (NewFileName))
 					sys.exit(2)
 				outFile = codecs.open(self.outputFile, 'w', 'utf-8', 'ignore')
 				outFile.write(self.output)
@@ -100,14 +100,14 @@ class VcfToCsvConverter:
 			for NewFileName in self.inputFileArray:
 				try:
 					if self.verbose:
-						print "Processing .... %s\n" % (NewFileName)
+						print("Processing .... %s\n" % (NewFileName))
 					inFile = codecs.open(NewFileName, 'r', 'utf-8', 'ignore')
 					theLine = inFile.readline()
 					for theLine in inFile:
 						self.__parseLine(theLine)
 					inFile.close()
 				except IOError:
-					print "error opening file during read operation via path: %s\n" % (NewFileName)
+					print("error opening file during read operation via path: %s\n" % (NewFileName))
 					sys.exit(2)
 			outFile.write(self.output)
 			outFile.close()
@@ -455,11 +455,11 @@ def main():
 	if (options.input_file == None and options.input_path == None) or options.output_file == None:
 		parser.error("Required options are missing")
 	if options.input_file != None and options.input_path == None:
-		print "converting %s > %s (%s delimited)" % (options.input_file, options.output_file, delimiter_string)
+		print("converting %s > %s (%s delimited)" % (options.input_file, options.output_file, delimiter_string))
 		VcfToCsvConverter(options.input_file, options.input_path, options.output_file, delimiter, options.quote, options.trace, options.verbose)
 		sys.exit(0)
 	elif options.input_file == None and options.input_path != None:
-		print "converting files within path: %s > %s (%s delimited)" % (options.input_path, options.output_file, delimiter_string)
+		print("converting files within path: %s > %s (%s delimited)" % (options.input_path, options.output_file, delimiter_string))
 		VcfToCsvConverter(options.input_file, options.input_path, options.output_file, delimiter, options.quote, options.trace, options.verbose)
 		sys.exit(0)
 
